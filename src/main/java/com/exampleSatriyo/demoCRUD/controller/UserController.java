@@ -1,14 +1,10 @@
 package com.exampleSatriyo.demoCRUD.controller;
 
-import javax.validation.Valid;
 import java.util.List;
-
 
 import com.exampleSatriyo.demoCRUD.model.GeneralResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.exampleSatriyo.demoCRUD.entity.User;
@@ -56,9 +52,13 @@ public class UserController {
         return resp;
     }
 
-    @PostMapping("updateUser/{id}")
-    public GeneralResponse updateUser(@RequestBody User user){
+    @PutMapping("updateUser/{id}")
+    public GeneralResponse updateUser(@PathVariable(value = "id")@RequestBody User user){
         try {
+
+            user.setName(user.getName());
+            user.setEmail(user.getEmail());
+            user.setPhoneNo(user.getPhoneNo());
             userRepository.save(user);
         }catch (Exception ex){
             return new GeneralResponse(300,user,ex.getLocalizedMessage());

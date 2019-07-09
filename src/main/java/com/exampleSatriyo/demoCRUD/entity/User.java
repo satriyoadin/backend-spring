@@ -2,9 +2,11 @@ package com.exampleSatriyo.demoCRUD.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
@@ -21,9 +23,10 @@ public class User {
     @Column(name = "phone_no")
     private long phoneNo;
 
-    @ManyToOne
-    @JoinColumn
-    private Pendidikan pendidikan;
+    @OneToMany(mappedBy="user")
+    private List<Pendidikan> pendidikan;
+    private long pendidikanId;
+    private String pendidikanName;
 
     public User(){}
 
@@ -62,6 +65,22 @@ public class User {
 
     public long getPhoneNo(){
         return phoneNo;
+    }
+
+    public void setPendidikanId(long pendidikanId){
+        this.pendidikanId = pendidikanId;
+    }
+
+    public long getPendidikanId(){
+        return pendidikanId;
+    }
+
+    public void setPendidikanName(){
+        this.pendidikanName = pendidikanName;
+    }
+
+    public String getPendidikanName(){
+        return pendidikanName;
     }
 
 }

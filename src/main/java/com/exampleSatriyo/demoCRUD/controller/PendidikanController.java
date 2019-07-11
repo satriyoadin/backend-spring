@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import com.exampleSatriyo.demoCRUD.entity.User;
 import com.exampleSatriyo.demoCRUD.repository.UserRepository;
 
-    @RestController
-    @RequestMapping("/pendidikan/")
-    public class PendidikanController {
+@RestController
+@RequestMapping("/pendidikan/")
+public class PendidikanController {
 
         @Autowired
         private final UserRepository userRepository;
@@ -26,7 +26,7 @@ import com.exampleSatriyo.demoCRUD.repository.UserRepository;
             this.pendidikanRepository = pendidikanRepository;
         }
 
-        @GetMapping("getAllUser")
+        @GetMapping("getAllPendidikan")
         public List<Pendidikan> getAllPendidikan(){
             return pendidikanRepository.findAll();
         }

@@ -1,5 +1,7 @@
 package com.exampleSatriyo.demoCRUD.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -11,6 +13,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long Id;
 
     @NotBlank(message = "Name is Mandatory")
@@ -23,10 +26,47 @@ public class User {
     @Column(name = "phone_no")
     private long phoneNo;
 
-    @OneToMany(mappedBy="user")
+    //    @JsonIgnore
+    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
     private List<Pendidikan> pendidikan;
-    private long pendidikanId;
-    private String pendidikanName;
+    //private String pendidikanName;
+    public List<Pendidikan> getPendidikan() {
+        return pendidikan;
+    }
+
+    public void setPendidikan(List<Pendidikan> pendidikan) {
+        this.pendidikan = pendidikan;
+    }
+
+    @OneToOne(mappedBy="user", fetch = FetchType.EAGER)
+    private Alamat alamat;
+    //private String street;
+    //private String city;
+
+    public Alamat getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(Alamat alamat) {
+        this.alamat = alamat;
+    }
+    /*
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+    */
 
     public User(){}
 
@@ -67,20 +107,8 @@ public class User {
         return phoneNo;
     }
 
-    public void setPendidikanId(long pendidikanId){
-        this.pendidikanId = pendidikanId;
-    }
 
-    public long getPendidikanId(){
-        return pendidikanId;
-    }
 
-    public void setPendidikanName(){
-        this.pendidikanName = pendidikanName;
-    }
 
-    public String getPendidikanName(){
-        return pendidikanName;
-    }
 
 }

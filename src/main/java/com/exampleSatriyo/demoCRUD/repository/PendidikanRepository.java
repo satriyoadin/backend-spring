@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PendidikanRepository extends CrudRepository<Pendidikan, Long> {
     List<Pendidikan> findAll();
+
 }
